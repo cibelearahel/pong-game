@@ -39,8 +39,8 @@ hud.speed(0)
 hud.color("blue")
 hud.penup()
 hud.hideturtle()
-hud.goto(0, 260)
-hud.write("Player 1: 0 Player 2: 0", align="center", font=("Courier", 24, "normal"))
+hud.goto(0, 255)
+hud.write("1st Player - 0 x 0 - 2nd Player", align="center", font=("Courier", 24, "normal"))
 
 
 def paddle_1_up():
@@ -79,9 +79,19 @@ def paddle_2_down():
     paddle_2.sety(y)
 
 
+def screen_endgame():
+    hud.speed(0)
+    hud.shape("square")
+    hud.color("yellow")
+    hud.penup()
+    hud.hideturtle()
+
+
 screen.listen()
 screen.onkeypress(paddle_1_up, "w")
 screen.onkeypress(paddle_1_down, "s")
+screen.onkeypress(paddle_1_up, "W")
+screen.onkeypress(paddle_1_down, "S")
 screen.onkeypress(paddle_2_up, "Up")
 screen.onkeypress(paddle_2_down, "Down")
 
@@ -104,7 +114,7 @@ while True:
         ball.dx *= -1
         score_1 += 1
         hud.clear()
-        hud.write("Player 1: {} Player 2: {}".format(score_1, score_2),
+        hud.write("1st Player - {} x {} - 2nd Player".format(score_1, score_2),
                   align="center", font=("Courier", 24, "normal"))
 
     if ball.xcor() < -390:
@@ -112,7 +122,7 @@ while True:
         ball.dx *= -1
         score_2 += 1
         hud.clear()
-        hud.write("Player 1: {} Player 2: {}".format(score_1, score_2),
+        hud.write("1st Player - {} x {} - 2nd Player".format(score_1, score_2),
                   align="center", font=("Courier", 24, "normal"))
 
     if (340 < ball.xcor() < 350) and (paddle_2.ycor() + 40 > ball.ycor()
@@ -124,3 +134,22 @@ while True:
                                         > paddle_1.ycor() - 40):
         ball.setx(-340)
         ball.dx *= -1
+
+    if score_1 == 10 or score_2 == 10:
+        screen.reset()
+        hud = turtle.Turtle()
+        screen_endgame()
+        hud.goto(0, 50)
+
+        if score_1 == 10:
+            hud.write("1st PLAYER VICTORY 🏆", align="center",
+                      font=("Courier", 24, "normal"))
+        else:
+            hud.write("2nd PLAYER VICTORY 🏆", align="center",
+                      font=("Courier", 24, "normal"))
+        hud.goto(0, 10)
+        hud.write("\nPress Esc to Exit", align="center",
+                  font=("Courier", 20, "normal"))
+
+        screen.onkeypress(screen.bye, "Escape")
+        screen.listen()
