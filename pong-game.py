@@ -45,25 +45,37 @@ hud.write("Player 1: 0 Player 2: 0", align="center", font=("Courier", 24, "norma
 
 def paddle_1_up():
     y = paddle_1.ycor()
-    y += 20
+    if y < 250:
+        y += 30
+    else:
+        y = 250
     paddle_1.sety(y)
 
 
 def paddle_1_down():
     y = paddle_1.ycor()
-    y -= 20
+    if y > -250:
+        y -= 30
+    else:
+        y = -250
     paddle_1.sety(y)
 
 
 def paddle_2_up():
     y = paddle_2.ycor()
-    y += 20
+    if y < 250:
+        y += 30
+    else:
+        y = 250
     paddle_2.sety(y)
 
 
 def paddle_2_down():
     y = paddle_2.ycor()
-    y -= 20
+    if y > -250:
+        y -= 30
+    else:
+        y = -250
     paddle_2.sety(y)
 
 
