@@ -118,7 +118,7 @@ def toggle_pause():
         pause.hideturtle()
         is_paused = False
     else:
-        pause.showturtle()
+        pause.hideturtle()
         is_paused = True
 
 
@@ -186,7 +186,6 @@ while True:
             bird.penup()
 
         if score_1 == 10 or score_2 == 10:
-            screen.reset()
             hud = turtle.Turtle()
             screen_endgame()
             hud.goto(0, 50)
